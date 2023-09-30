@@ -1,0 +1,21 @@
+{
+    # default settings for job on SLURM cluster
+    "__default__" :
+    {
+        "memory"    : 15, # all jobs default to 15 in Gb
+        "name"      : "snkmk.{rule}.{wildcards}",
+        "output"    : "logs/cluster/{rule}/snkmk.{wildcards}.o",
+        "error"     : "logs/cluster/{rule}/snkmk.{wildcards}.e"
+    },
+
+    "magma__annotate_genes":
+    {
+        "memory"     : 50 # Give default 80 Gb - can be big files
+    },
+
+    "magma__run":
+    {
+        "memory"     : 50 # Give a lot -- can cut back if need to
+    }
+
+}

@@ -1,0 +1,45 @@
+# Shared configurations
+study:
+    ibd: 'data/IBD_DeLange2017.sumstats.gz'
+    cd: 'data/CD_DeLange2017.sumstats.gz'
+
+features:
+    - 'data/features/GTEx.txt'
+    - 'data/features/mouse_brain2_diffexprs_tstat_clusters.txt'
+
+gene_locations: '../assets/gene_locations__hg19.txt'
+chromosomes: [ "21", "22" ]
+loco: false # Leave one out method
+
+# Stage 1: MAGMA
+magma:
+    description: "Settings for VCF QC module"
+
+    annotate:
+        description: "MAGMA annotation settings"
+        run_process: true
+        window_upstream_kb: 5
+        window_downstream_kb: 5
+    
+    score_genes:
+        description: "Settings to score genes"
+        ld_reference: 'data/ld_reference/1000genomes_hg19_chr21_22'
+        sumstat_n_col: 'N'
+        sumstat_variant_id_col: 'SNP'
+        sumstat_pvalue_col: 'PVAL'
+
+# Stage 2: PoPs
+pops:
+    control_features: 'data/control_features.txt'
+    permute_controls: true # true if control features should also be shuffled
+    keep_hla_genes: false # Default is false
+
+# Stage 3: Empirical PoPS analysis
+empirical_pops:
+    description: "Settings for running empirical PoPS"
+    n_iterations: 4
+    grouped: false
+    use_absolute_value: false
+
+    batch_iterations: false
+    n_batch: 2
